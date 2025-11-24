@@ -20,7 +20,6 @@ app = FastAPI(
 )
 
 
-# Create table automatically when the application starts
 initialize_database()
 
 
@@ -36,7 +35,7 @@ def convert_row_to_model(row) -> Address:
 
 def calculate_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     """Returns distance between two coordinates in kilometers using Haversine formula."""
-    R = 6371  # Earth radius in km
+    R = 6371
     d_lat = math.radians(lat2 - lat1)
     d_lon = math.radians(lon2 - lon1)
 
@@ -45,7 +44,7 @@ def calculate_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> fl
     return R * c
 
 
-@app.post("/addresses", response_model=Address)
+@app.post("/p_addresses", response_model=Address)
 def create_address(address: AddressCreate):
     new_id = insert_address(
         address.name,
@@ -57,7 +56,7 @@ def create_address(address: AddressCreate):
     return convert_row_to_model(row)
 
 
-@app.get("/addresses", response_model=List[Address])
+@app.get("/get_addresses", response_model=List[Address])
 def get_all():
     rows = fetch_all_addresses()
     return [convert_row_to_model(r) for r in rows]

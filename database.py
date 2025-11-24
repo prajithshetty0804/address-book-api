@@ -30,7 +30,7 @@ def initialize_database():
     conn.close()
 
 
-def insert_address(name: str, latitude: float, longitude: float, description: Optional[str]) -> int:
+def insert_address(name: str, latitude: float, longitude: float, description: Optional[str]) -> int | None:
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(

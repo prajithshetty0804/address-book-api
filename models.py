@@ -13,3 +13,6 @@ class AddressCreate(AddressBase):
 
 class Address(AddressBase):
     id: int
+
+    class Config:
+        orm_mode = True
